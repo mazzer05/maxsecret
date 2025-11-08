@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  Panel,
+  Grid,
+  Container,
+  Flex,
+  Avatar,
+  Typography,
+  Button,
+} from "@maxhub/max-ui";
+import { Route, Routes } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => (
+  <Routes>
+    <Route
+      path="/"
+      element={
+        <Panel mode="secondary">
+          <Grid gap={12} cols={1}>
+            <Container className="p-4">
+              <Flex direction="column" align="center">
+                <Avatar.Container size={72} form="circle">
+                  <Avatar.Image src="https://sun9-21.userapi.com/1N-rJz6-7hoTDW7MhpWe19e_R_TdGV6Wu5ZC0A/67o6-apnAks.jpg" />
+                </Avatar.Container>
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+                <Typography.Title>Иван Иванов</Typography.Title>
+              </Flex>
+            </Container>
+          </Grid>
+        </Panel>
+      }
+    />
+  </Routes>
+);
 
-export default App
+export default App;
