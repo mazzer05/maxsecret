@@ -8,6 +8,8 @@ import {
   Button,
 } from "@maxhub/max-ui";
 import TabBar from "../components/tabs";
+import CircularProgress from "../components/circular-progress";
+import { currentNorm, dailyNorm } from "../mocks/variables";
 
 const Main = () => (
   <Panel mode="secondary">
@@ -18,6 +20,14 @@ const Main = () => (
             <Avatar.Image src="https://sun9-21.userapi.com/1N-rJz6-7hoTDW7MhpWe19e_R_TdGV6Wu5ZC0A/67o6-apnAks.jpg" />
           </Avatar.Container>
           <Typography.Title>Иван Иванов</Typography.Title>
+          <div className="p-4">
+            <h2>Сегодня</h2>
+            <CircularProgress
+              value={currentNorm}
+              max={dailyNorm}
+              label="ккал"
+            />
+          </div>
         </Flex>
       </Container>
     </Grid>

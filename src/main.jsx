@@ -9,7 +9,7 @@ import { TabProvider } from "./contexts/TabContext.jsx";
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <TabProvider>
-      <MaxUI colorScheme="light" platform="ios">
+      <MaxUI colorScheme="dark" platform="ios">
         <App />
       </MaxUI>
     </TabProvider>
