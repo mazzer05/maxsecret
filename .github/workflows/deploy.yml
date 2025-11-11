@@ -36,19 +36,20 @@ jobs:
             ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
       - name: Deploy to server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            echo "Stopping old container..."
-            docker stop web || true
-            docker rm web || true
-            echo "Removing old image..."
-            docker rmi ghcr.io/${{ env.IMAGE_NAME }}:latest || true
-            echo "Pulling new image..."
-            docker pull ghcr.io/${{ env.IMAGE_NAME }}:latest
-            echo "Running new container..."
-            docker run -d --name web -p 80:80 --restart unless-stopped ghcr.io/${{ env.IMAGE_NAME }}:latest
-            echo "Deployment complete!"
+  uses: appleboy/ssh-action@v1.0.3
+  with:
+    host: ${{ secrets.SERVER_HOST }}
+    username: ${{ secrets.SERVER_USER }}
+    key: ${{ secrets.SSH_PRIVATE_KEY }}
+    script: |
+      docker stop web || true
+      docker rm web || true
+
+      docker run -d \
+        --name web \
+        --network nginx-proxy \
+        -e VIRTUAL_HOST=maxsecret.ddns.net \
+        -e LETSENCRYPT_HOST=maxsecret.ddns.net \
+        -e LETSENCRYPT_EMAIL=mixail_dremov@mail.ru \
+        --restart unless-stopped \
+        ghcr.io/slavadoroshenko/maxsecret:latest
