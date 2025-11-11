@@ -21,7 +21,7 @@ const Main = () => (
       <Container className="p-4 bg-[#111c27]">
         <Flex direction="column" align="center">
           <Typography.Headline variant="large-strong">
-            Максим выиграл меня в бильярде
+            Кир любит Кристину
           </Typography.Headline>
 
           <Flex direction="row" align="center" gap={72}>
