@@ -7,7 +7,7 @@ export default function MacronutrientBar({ label, current, max, unit = "г" }) {
 
       <div className="w-full h-2 bg-blue-100 rounded-full overflow-hidden">
         <div
-          className="h-full bg-blue-500 transition-all duration-300 ease-out"
+          className="h-full bg-blue-505 transition-all duration-300 ease-out"
           style={{ width: `${percentage}%` }}
         ></div>
       </div>
