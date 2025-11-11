@@ -1,0 +1,41 @@
+name: Deploy MaxSecret
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository }}:latest
+
+      # Опционально: деплой на сервер
+      # - name: Deploy to server
+      #   uses: appleboy/ssh-action@v1.0.3
+      #   with:
+      #     host: ${{ secrets.SERVER_HOST }}
+      #     username: ${{ secrets.SERVER_USER }}
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     script: |
+      #       docker stop web || true
+      #       docker rm web || true
+      #       docker rmi ghcr.io/${{ github.repository }}:latest || true
+      #       docker pull ghcr.io/${{ github.repository }}:latest
+      #       docker run -d --name web -p 80:80 ghcr.io/${{ github.repository }}:latest

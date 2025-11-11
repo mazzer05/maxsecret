@@ -13,6 +13,7 @@ import { currentNorm, dailyNorm, dailyRemain } from "../mocks/variables";
 import ArrowRight from "../assets/arrow-right.svg";
 import StatisticIcon from "../assets/statistic.svg";
 import NormStatic from "../components/norm-static";
+import MacronutrientBar from "../components/progress-bars";
 
 const Main = () => (
   <Panel mode="secondary">
@@ -52,6 +53,17 @@ const Main = () => (
               label="ккал"
             />
             <NormStatic value={dailyRemain} label="осталось" />
+          </Flex>
+          <Flex
+            direction="row"
+            align="center"
+            display="inline-flex"
+            justify="between"
+            className="w-full justify-between"
+          >
+            <MacronutrientBar label="белки" current={12} max={100} unit="г" />
+            <MacronutrientBar label="белки" current={12} max={100} unit="г" />
+            <MacronutrientBar label="белки" current={12} max={100} unit="г" />
           </Flex>
         </Flex>
       </Container>
