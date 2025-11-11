@@ -8,7 +8,7 @@ export default function NormStatic({ value = 0, label = "" }) {
           {value}
         </Typography.Title>
         {label && (
-          <Typography.Label className="text-gray-500 mt-1">
+          <Typography.Label className="text-gray-550 mt-1">
             {label}
           </Typography.Label>
         )}
