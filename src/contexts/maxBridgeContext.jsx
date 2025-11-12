@@ -19,17 +19,13 @@ export const MaxBridgeProvider = ({ children }) => {
       const app = window.WebApp;
       setWebApp(app);
     }
-  }, [webApp]);
+  }, []);
 
   if (!webApp) {
     return <div>Загрузка...</div>;
   } else {
     return (
-      <MaxBridgeContext.Provider
-        value={{
-          webApp,
-        }}
-      >
+      <MaxBridgeContext.Provider value={webApp}>
         {children}
       </MaxBridgeContext.Provider>
     );

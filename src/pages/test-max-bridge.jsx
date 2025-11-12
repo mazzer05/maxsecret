@@ -2,6 +2,7 @@ import { useMaxBridge } from "../contexts/maxBridgeContext";
 
 function Test() {
   const webApp = useMaxBridge();
+
   return (
     <div>
       <h1>Привет, {webApp.initData}!</h1>
