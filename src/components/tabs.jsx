@@ -3,7 +3,7 @@ import DiaryIcon from "../assets/diary.svg";
 import ProfileIcon from "../assets/profile.svg";
 import ReceptsIcon from "../assets/recepts.svg";
 import StatisticIcon from "../assets/statistic.svg";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const tabs = [
   { id: "diary", label: "Дневник", Icon: DiaryIcon },
@@ -21,6 +21,7 @@ export default function TabBar() {
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           const textColor = isActive ? "text-blue-600" : "text-gray-500";
+          const navigate = useNavigate();
 
           return (
             <button
@@ -28,7 +29,7 @@ export default function TabBar() {
               onClick={() => {
                 setActiveTab(tab.id);
                 if (tab.id == "profile") {
-                  <Navigate to={"test"} />;
+                  navigate("/test");
                 }
               }}
               className={`flex flex-col items-center text-xs ${textColor}`}
