@@ -30,6 +30,8 @@ export default function TabBar() {
                 setActiveTab(tab.id);
                 if (tab.id == "profile") {
                   navigate("/test");
+                } else if (tab.id == "recepts") {
+                  navigate("/barcode");
                 }
               }}
               className={`flex flex-col items-center text-xs ${textColor}`}
