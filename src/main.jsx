@@ -5,13 +5,16 @@ import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { TabProvider } from "./contexts/TabContext.jsx";
+import { MaxBridgeProvider } from "./contexts/maxBridgeContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <TabProvider>
-      <MaxUI colorScheme="dark" platform="ios">
-        <App />
-      </MaxUI>
+      <MaxBridgeProvider>
+        <MaxUI colorScheme="dark" platform="ios">
+          <App />
+        </MaxUI>
+      </MaxBridgeProvider>
     </TabProvider>
   </BrowserRouter>
 );

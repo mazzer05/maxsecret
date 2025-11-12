@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { BrowserMultiFormatReader } from "@zxing/browser";
 import { NotFoundException } from "@zxing/library";
 import { useNavigate } from "react-router-dom";
+import { useMaxBridge } from "../contexts/maxBridgeContext";
 
 export default function BarcodeScannerPage() {
   const videoRef = useRef(null);
@@ -9,6 +10,7 @@ export default function BarcodeScannerPage() {
   const [error, setError] = useState(null);
   const [lastResult, setLastResult] = useState(null);
   const navigate = useNavigate();
+  const webApp = useMaxBridge();
 
   useEffect(() => {
     if (!isScanning) return;
@@ -24,13 +26,16 @@ export default function BarcodeScannerPage() {
             if (result) {
               const barcode = result.getText();
               setLastResult(barcode);
-              setIsScanning(false); // остановить после первого успешного скана
+              setIsScanning(true); // остановить после первого успешного скана
               codeReader.reset();
 
               // 💡 Здесь можно:
               // - отправить barcode на бэкенд
               // - сохранить в localStorage
               // - перейти на страницу продукта и т.д.
+              webApp.openLink(
+                `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
+              );
               console.log("Найден штрих-код:", barcode);
 
               // Пример: перейти назад с результатом (если нужно)
