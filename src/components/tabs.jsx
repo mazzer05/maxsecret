@@ -7,16 +7,16 @@ import { useNavigate } from "react-router-dom";
 
 const tabs = [
   { id: "diary", label: "Дневник", Icon: DiaryIcon },
-  { id: "profile", label: "Профиль", Icon: ProfileIcon },
-  { id: "recepts", label: "Рецепты", Icon: ReceptsIcon },
   { id: "statistic", label: "Статистика", Icon: StatisticIcon },
+  { id: "recepts", label: "Рецепты", Icon: ReceptsIcon },
+  { id: "profile", label: "Профиль", Icon: ProfileIcon },
 ];
 
 export default function TabBar() {
   const { activeTab, setActiveTab } = useTab();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-10 p-4">
+    <div className="fixed bottom-0 left-0 right-0 z-10 p-4">
       <div className="flex justify-around items-center h-14 px-2">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;

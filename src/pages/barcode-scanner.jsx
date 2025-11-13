@@ -12,6 +12,10 @@ export default function BarcodeScannerPage() {
   const navigate = useNavigate();
   const webApp = useMaxBridge();
 
+  const isgetUserMediaSupported = () => {
+    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+  };
+
   useEffect(() => {
     if (!isScanning) return;
 
@@ -70,157 +74,167 @@ export default function BarcodeScannerPage() {
     setIsScanning(true);
   };
 
-  return (
-    <div style={{ padding: "16px", maxWidth: "500px", margin: "0 auto" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "16px" }}>
-        Сканирование штрих-кода
-      </h2>
+  if (isgetUserMediaSupported()) {
+    return (
+      <div style={{ padding: "16px", maxWidth: "500px", margin: "0 auto" }}>
+        <h2 style={{ textAlign: "center", marginBottom: "16px" }}>
+          Сканирование штрих-кода
+        </h2>
 
-      {lastResult ? (
-        <div style={{ textAlign: "center" }}>
-          <p>✅ Найден штрих-код:</p>
-          <p
-            style={{ fontWeight: "bold", fontSize: "1.2em", margin: "12px 0" }}
-          >
-            {lastResult}
-          </p>
-          <div style={{ marginTop: "16px" }}>
-            <button
-              onClick={handleUseResult}
+        {lastResult ? (
+          <div style={{ textAlign: "center" }}>
+            <p>✅ Найден штрих-код:</p>
+            <p
               style={{
-                padding: "10px 20px",
-                backgroundColor: "#1e40af",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-                marginRight: "8px",
+                fontWeight: "bold",
+                fontSize: "1.2em",
+                margin: "12px 0",
               }}
             >
-              Использовать
-            </button>
-            <button
-              onClick={handleRestart}
-              style={{
-                padding: "10px 20px",
-                backgroundColor: "#6b7280",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-              }}
-            >
-              Сканировать снова
-            </button>
-          </div>
-        </div>
-      ) : (
-        <>
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              paddingTop: "100%", // квадратный превью
-              overflow: "hidden",
-              borderRadius: "12px",
-              backgroundColor: "#000",
-            }}
-          >
-            <video
-              ref={videoRef}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-              autoPlay
-              playsInline
-            />
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                width: "240px",
-                height: "160px",
-                transform: "translate(-50%, -50%)",
-                border: "2px solid #3b82f6",
-                borderRadius: "8px",
-                boxSizing: "border-box",
-                pointerEvents: "none",
-              }}
-            >
-              {/* Угловые маркеры (опционально) */}
-              <div
+              {lastResult}
+            </p>
+            <div style={{ marginTop: "16px" }}>
+              <button
+                onClick={handleUseResult}
                 style={{
-                  position: "absolute",
-                  top: "-4px",
-                  left: "-4px",
-                  width: "20px",
-                  height: "20px",
-                  borderTop: "4px solid #3b82f6",
-                  borderLeft: "4px solid #3b82f6",
+                  padding: "10px 20px",
+                  backgroundColor: "#1e40af",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "6px",
+                  marginRight: "8px",
                 }}
-              ></div>
-              <div
+              >
+                Использовать
+              </button>
+              <button
+                onClick={handleRestart}
                 style={{
-                  position: "absolute",
-                  top: "-4px",
-                  right: "-4px",
-                  width: "20px",
-                  height: "20px",
-                  borderTop: "4px solid #3b82f6",
-                  borderRight: "4px solid #3b82f6",
+                  padding: "10px 20px",
+                  backgroundColor: "#6b7280",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "6px",
                 }}
-              ></div>
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "-4px",
-                  left: "-4px",
-                  width: "20px",
-                  height: "20px",
-                  borderBottom: "4px solid #3b82f6",
-                  borderLeft: "4px solid #3b82f6",
-                }}
-              ></div>
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "-4px",
-                  right: "-4px",
-                  width: "20px",
-                  height: "20px",
-                  borderBottom: "4px solid #3b82f6",
-                  borderRight: "4px solid #3b82f6",
-                }}
-              ></div>
+              >
+                Сканировать снова
+              </button>
             </div>
           </div>
-
-          {error && (
-            <p style={{ color: "red", textAlign: "center", marginTop: "12px" }}>
-              {error}
-            </p>
-          )}
-
-          <div style={{ textAlign: "center", marginTop: "16px" }}>
-            <button
-              onClick={() => navigate(-1)}
+        ) : (
+          <>
+            <div
               style={{
-                padding: "8px 16px",
-                backgroundColor: "#ef4444",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
+                position: "relative",
+                width: "100%",
+                paddingTop: "100%", // квадратный превью
+                overflow: "hidden",
+                borderRadius: "12px",
+                backgroundColor: "#000",
               }}
             >
-              Отмена
-            </button>
-          </div>
-        </>
-      )}
-    </div>
-  );
+              <video
+                ref={videoRef}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                autoPlay
+                playsInline
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: "240px",
+                  height: "160px",
+                  transform: "translate(-50%, -50%)",
+                  border: "2px solid #3b82f6",
+                  borderRadius: "8px",
+                  boxSizing: "border-box",
+                  pointerEvents: "none",
+                }}
+              >
+                {/* Угловые маркеры (опционально) */}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "-4px",
+                    left: "-4px",
+                    width: "20px",
+                    height: "20px",
+                    borderTop: "4px solid #3b82f6",
+                    borderLeft: "4px solid #3b82f6",
+                  }}
+                ></div>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "-4px",
+                    right: "-4px",
+                    width: "20px",
+                    height: "20px",
+                    borderTop: "4px solid #3b82f6",
+                    borderRight: "4px solid #3b82f6",
+                  }}
+                ></div>
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "-4px",
+                    left: "-4px",
+                    width: "20px",
+                    height: "20px",
+                    borderBottom: "4px solid #3b82f6",
+                    borderLeft: "4px solid #3b82f6",
+                  }}
+                ></div>
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "-4px",
+                    right: "-4px",
+                    width: "20px",
+                    height: "20px",
+                    borderBottom: "4px solid #3b82f6",
+                    borderRight: "4px solid #3b82f6",
+                  }}
+                ></div>
+              </div>
+            </div>
+
+            {error && (
+              <p
+                style={{ color: "red", textAlign: "center", marginTop: "12px" }}
+              >
+                {error}
+              </p>
+            )}
+
+            <div style={{ textAlign: "center", marginTop: "16px" }}>
+              <button
+                onClick={() => navigate(-1)}
+                style={{
+                  padding: "8px 16px",
+                  backgroundColor: "#ef4444",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "6px",
+                }}
+              >
+                Отмена
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  } else {
+    <h1>нельзя</h1>;
+  }
 }

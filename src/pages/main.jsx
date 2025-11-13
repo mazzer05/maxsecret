@@ -16,7 +16,7 @@ import NormStatic from "../components/norm-static";
 import MacronutrientBar from "../components/progress-bars";
 
 const Main = () => (
-  <Panel mode="secondary">
+  <Panel mode="primary" className="h-dvw">
     <Grid gap={12} cols={1}>
       <Container className="p-4 bg-[#111c27]">
         <Flex direction="column" align="center">
