@@ -6,6 +6,7 @@ import {
   Avatar,
   Typography,
   Button,
+  CellList,
 } from "@maxhub/max-ui";
 import TabBar from "../components/tabs";
 import CircularProgress from "../components/circular-progress";
@@ -16,10 +17,14 @@ import MacronutrientBar from "../components/progress-bars";
 
 const Main = () => (
   <Panel mode="secondary" className="h-dvh flex flex-col">
-    <div className="flex-1 overflow-y-auto pb-24">
-      <Grid gap={12} cols={1}>
-        <Container className="p-4">
-          <Flex direction="column" align="center">
+    <Grid gap={12} cols={1}>
+      <div className="h-dvh bg-inherit">
+        <CellList
+          mode="full-width"
+          filled={true}
+          className="rounded-b-4xl overflow-hidden"
+        >
+          <Flex direction="column" align="center" className="p-2 pb-5">
             <Typography.Headline variant="large-strong" className="mb-4 mt-2">
               Дневник
             </Typography.Headline>
@@ -29,7 +34,9 @@ const Main = () => (
                 <ArrowRight className="w-4 h-4 rotate-180" />
               </Button>
 
-              <Typography.Title>Четверг, 09 ноября</Typography.Title>
+              <Typography.Title variant="custom" className="text-xl">
+                Четверг, 09 ноября
+              </Typography.Title>
 
               <Button mode="link">
                 <ArrowRight className="w-4 h-4" />
@@ -66,9 +73,9 @@ const Main = () => (
               />
             </Flex>
           </Flex>
-        </Container>
-      </Grid>
-    </div>
+        </CellList>
+      </div>
+    </Grid>
 
     <TabBar />
   </Panel>

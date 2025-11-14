@@ -27,7 +27,6 @@ export default function BarcodeScannerPage() {
               const barcode = result.getText();
               setLastResult(barcode);
               setIsScanning(true); // остановить после первого успешного скана
-              codeReader.reset();
               // Пример: перейти назад с результатом (если нужно)
               // или показать уведомление и кнопку "Использовать"
             } else if (err && !(err instanceof NotFoundException)) {
@@ -48,10 +47,6 @@ export default function BarcodeScannerPage() {
     };
 
     startScanning();
-
-    return () => {
-      codeReader.reset();
-    };
   }, [isScanning]);
 
   const handleUseResult = () => {

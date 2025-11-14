@@ -18,11 +18,11 @@ export default function TabBar() {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-10 p-4 bg-inherit border-t border-gray-200">
+    <div className="fixed bottom-0 left-0 right-0 z-10 p-4 bg-inherit border-t border-[#cbdaed]">
       <div className="flex justify-around items-center h-14 px-2">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
-          const textColor = isActive ? "text-blue-600" : "text-gray-500";
+          const textColor = isActive ? "text-[#137ff4]" : "text-gray-500";
 
           return (
             <button
@@ -32,9 +32,9 @@ export default function TabBar() {
                 if (tab.id === "profile") navigate("/test");
                 else if (tab.id === "recepts") navigate("/barcode");
               }}
-              className={`flex flex-col items-center text-xs ${textColor}`}
+              className={`flex flex-col items-center ${textColor} transition-all duration-00 ease-out`}
             >
-              <div className="w-6 h-6">{tab.Icon}</div>
+              <div className="w-6 h-6 ">{tab.Icon}</div>
               <span>{tab.label}</span>
             </button>
           );
