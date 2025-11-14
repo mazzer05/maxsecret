@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import TestRamzan from "./pages/test";
 import Main from "./pages/main";
-import BarcodeScanner from "./pages/barcode-scanner";
+import BarcodeScannerPage from "./pages/barcode-scanner";
 
 const App = () => (
   <Routes>

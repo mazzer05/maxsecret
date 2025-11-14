@@ -1,22 +1,22 @@
 import { useTab } from "../contexts/TabContext";
-import DiaryIcon from "../assets/diary.svg";
-import ProfileIcon from "../assets/profile.svg";
-import ReceptsIcon from "../assets/recepts.svg";
-import StatisticIcon from "../assets/statistic.svg";
+import DiaryIcon from "../assets/diary.svg?react";
+import ProfileIcon from "../assets/profile.svg?react";
+import ReceptsIcon from "../assets/recepts.svg?react";
+import StatisticIcon from "../assets/statistic.svg?react";
 import { useNavigate } from "react-router-dom";
 
 const tabs = [
-  { id: "diary", label: "Дневник", Icon: DiaryIcon },
-  { id: "statistic", label: "Статистика", Icon: StatisticIcon },
-  { id: "recepts", label: "Рецепты", Icon: ReceptsIcon },
-  { id: "profile", label: "Профиль", Icon: ProfileIcon },
+  { id: "diary", label: "Дневник", Icon: <DiaryIcon /> },
+  { id: "statistic", label: "Статистика", Icon: <StatisticIcon /> },
+  { id: "recepts", label: "Рецепты", Icon: <ReceptsIcon /> },
+  { id: "profile", label: "Профиль", Icon: <ProfileIcon /> },
 ];
 
 export default function TabBar() {
   const { activeTab, setActiveTab } = useTab();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-10 p-4">
+    <div className="fixed bottom-0 left-0 right-0 z-10 p-4 border-t-1 border-gray-200">
       <div className="flex justify-around items-center h-14 px-2">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
@@ -36,7 +36,7 @@ export default function TabBar() {
               }}
               className={`flex flex-col items-center text-xs ${textColor}`}
             >
-              <img src={tab.Icon} alt={tab.label} className="w-6 h-6" />
+              <div className="w-6 h-6">{tab.Icon}</div>
               <span>{tab.label}</span>
             </button>
           );

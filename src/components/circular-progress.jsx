@@ -23,7 +23,7 @@ export default function CircularProgress({
           cy="50"
           r={radius}
           fill="none"
-          stroke="#E5E7EB"
+          stroke="#cbdaed"
           strokeWidth="8"
         />
         <circle
@@ -31,7 +31,7 @@ export default function CircularProgress({
           cy="50"
           r={radius}
           fill="none"
-          stroke="#EFFCFF"
+          stroke="#137ff4"
           strokeWidth="8"
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
@@ -44,11 +44,7 @@ export default function CircularProgress({
         <Typography.Title variant="custom" className="font-bold ">
           {value}
         </Typography.Title>
-        {label && (
-          <Typography.Label className="text-gray-500 mt-1">
-            {label}
-          </Typography.Label>
-        )}
+        {label && <Typography.Label className="mt-1">{label}</Typography.Label>}
       </div>
     </div>
   );

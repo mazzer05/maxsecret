@@ -7,11 +7,7 @@ export default function NormStatic({ value = 0, label = "" }) {
         <Typography.Title variant="custom" className="font-bold ">
           {value}
         </Typography.Title>
-        {label && (
-          <Typography.Label className="text-gray-600 mt-1">
-            {label}
-          </Typography.Label>
-        )}
+        {label && <Typography.Label className="mt-1">{label}</Typography.Label>}
       </div>
     </div>
   );
