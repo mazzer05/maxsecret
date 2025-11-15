@@ -26,13 +26,10 @@ export default function BarcodeScannerPage() {
             if (result) {
               const barcode = result.getText();
               setLastResult(barcode);
-              setIsScanning(true); // остановить после первого успешного скана
-              // Пример: перейти назад с результатом (если нужно)
-              // или показать уведомление и кнопку "Использовать"
+              setIsScanning(true); // можно закомментировать, если нужно автоматически остановить
             } else if (err && !(err instanceof NotFoundException)) {
               setError("Ошибка при сканировании: " + err.message);
             }
-            // NotFoundException игнорируется — это просто "ничего не найдено"
           }
         );
       } catch (err) {
@@ -51,8 +48,6 @@ export default function BarcodeScannerPage() {
 
   const handleUseResult = () => {
     if (lastResult) {
-      // Пример: перейти на страницу добавления продукта с штрих-кодом
-      // navigate(`/add-product?barcode=${lastResult}`);
       webApp.openLink(
         `https://world.openfoodfacts.org/api/v0/product/${lastResult}.json`
       );
@@ -66,42 +61,23 @@ export default function BarcodeScannerPage() {
   };
 
   return (
-    <div style={{ padding: "16px", maxWidth: "500px", margin: "0 auto" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "16px" }}>
-        Сканирование штрих-кода
-      </h2>
+    <div className="p-4 mx-auto min-h-dvh">
+      <h2 className="text-center mb-4">Сканирование штрих-кода</h2>
 
       {lastResult ? (
-        <div style={{ textAlign: "center" }}>
+        <div className="text-center">
           <p>✅ Найден штрих-код:</p>
-          <p
-            style={{ fontWeight: "bold", fontSize: "1.2em", margin: "12px 0" }}
-          >
-            {lastResult}
-          </p>
-          <div style={{ marginTop: "16px" }}>
+          <p className="font-bold text-lg my-3">{lastResult}</p>
+          <div className="mt-4 flex justify-center gap-2">
             <button
               onClick={handleUseResult}
-              style={{
-                padding: "10px 20px",
-                backgroundColor: "#1e40af",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-                marginRight: "8px",
-              }}
+              className="px-5 py-2.5 bg-blue-700 text-white rounded-md"
             >
               Использовать
             </button>
             <button
               onClick={handleRestart}
-              style={{
-                padding: "10px 20px",
-                backgroundColor: "#6b7280",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-              }}
+              className="px-5 py-2.5 bg-gray-600 text-white rounded-md"
             >
               Сканировать снова
             </button>
@@ -109,107 +85,27 @@ export default function BarcodeScannerPage() {
         </div>
       ) : (
         <>
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              paddingTop: "100%", // квадратный превью
-              overflow: "hidden",
-              borderRadius: "12px",
-              backgroundColor: "#000",
-            }}
-          >
+          <div className="relative w-full pb-[100%] overflow-hidden rounded-xl bg-black">
             <video
               ref={videoRef}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
+              className="absolute top-0 left-0 w-full h-full object-cover"
               autoPlay
               playsInline
             />
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                width: "240px",
-                height: "160px",
-                transform: "translate(-50%, -50%)",
-                border: "2px solid #3b82f6",
-                borderRadius: "8px",
-                boxSizing: "border-box",
-                pointerEvents: "none",
-              }}
-            >
-              {/* Угловые маркеры (опционально) */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "-4px",
-                  left: "-4px",
-                  width: "20px",
-                  height: "20px",
-                  borderTop: "4px solid #3b82f6",
-                  borderLeft: "4px solid #3b82f6",
-                }}
-              ></div>
-              <div
-                style={{
-                  position: "absolute",
-                  top: "-4px",
-                  right: "-4px",
-                  width: "20px",
-                  height: "20px",
-                  borderTop: "4px solid #3b82f6",
-                  borderRight: "4px solid #3b82f6",
-                }}
-              ></div>
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "-4px",
-                  left: "-4px",
-                  width: "20px",
-                  height: "20px",
-                  borderBottom: "4px solid #3b82f6",
-                  borderLeft: "4px solid #3b82f6",
-                }}
-              ></div>
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "-4px",
-                  right: "-4px",
-                  width: "20px",
-                  height: "20px",
-                  borderBottom: "4px solid #3b82f6",
-                  borderRight: "4px solid #3b82f6",
-                }}
-              ></div>
+            <div className="absolute top-1/2 left-1/2 w-60 h-40 -translate-x-1/2 -translate-y-1/2 border-2 border-blue-500 rounded-md box-border pointer-events-none">
+              <div className="absolute -top-1 -left-1 w-5 h-5 border-t-4 border-l-4 border-blue-500"></div>
+              <div className="absolute -top-1 -right-1 w-5 h-5 border-t-4 border-r-4 border-blue-500"></div>
+              <div className="absolute -bottom-1 -left-1 w-5 h-5 border-b-4 border-l-4 border-blue-500"></div>
+              <div className="absolute -bottom-1 -right-1 w-5 h-5 border-b-4 border-r-4 border-blue-500"></div>
             </div>
           </div>
 
-          {error && (
-            <p style={{ color: "red", textAlign: "center", marginTop: "12px" }}>
-              {error}
-            </p>
-          )}
+          {error && <p className="text-red-500 text-center mt-3">{error}</p>}
 
-          <div style={{ textAlign: "center", marginTop: "16px" }}>
+          <div className="text-center mt-4">
             <button
               onClick={() => navigate(-1)}
-              style={{
-                padding: "8px 16px",
-                backgroundColor: "#ef4444",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-              }}
+              className="px-4 py-2 bg-red-500 text-white rounded-md"
             >
               Отмена
             </button>
