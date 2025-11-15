@@ -18,8 +18,12 @@ import MacronutrientBar from "../components/progress-bars";
 import Plus from "../assets/plus.svg?react";
 import BreakFastIcon from "../assets/breakfast.svg?react";
 import MealItem from "../components/meal-item";
+import { useWindowScroll } from "@reactuses/core";
 
 const Main = () => {
+  const { y } = useWindowScroll();
+  const showShadow = y > 20;
+
   return (
     <Panel mode="secondary" className="flex flex-col">
       <div className="min-h-dvh bg-inherit pb-[70px]">
@@ -27,7 +31,9 @@ const Main = () => {
           <CellList
             mode="full-width"
             filled={true}
-            className="fixed top-0 left-0 right-0 z-10 rounded-b-4xl overflow-hidden  shadow-xl"
+            className={`fixed top-0 left-0 right-0 z-10 rounded-b-4xl overflow-hidden ${
+              showShadow ? "shadow-xl" : ""
+            }`}
           >
             <Flex direction="column" align="center" className="p-2">
               <Typography.Headline variant="large-strong" className="mb-4 mt-2">
@@ -108,10 +114,6 @@ const Main = () => {
             Приемы пищи
           </Typography.Headline>
 
-          <MealItem id={1} label={"Завтрак"} current={144} max={350} />
-          <MealItem id={1} label={"Завтрак"} current={144} max={350} />
-          <MealItem id={1} label={"Завтрак"} current={144} max={350} />
-          <MealItem id={1} label={"Завтрак"} current={144} max={350} />
           <MealItem id={1} label={"Завтрак"} current={144} max={350} />
           <MealItem id={1} label={"Завтрак"} current={144} max={350} />
           <MealItem id={1} label={"Завтрак"} current={144} max={350} />

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@maxhub/max-ui": "^0.1.12",
+    "@reactuses/core": "^6.1.5",
     "@tailwindcss/vite": "^4.1.17",
     "@zxing/browser": "^0.1.5",
     "@zxing/library": "^0.21.3",
