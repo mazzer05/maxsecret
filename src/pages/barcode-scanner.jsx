@@ -4,19 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { useMaxBridge } from "../contexts/maxBridgeContext";
 
 export default function BarcodeScannerPage() {
-  const videoRef = useRef < HTMLVideoElement > null;
+  const videoRef = useRef(HTMLVideoElement);
   const [isScanning, setIsScanning] = useState(true);
-  const [error, setError] = (useState < string) | (null > null);
-  const [lastResult, setLastResult] = (useState < string) | (null > null);
+  const [error, setError] = useState(null);
+  const [lastResult, setLastResult] = useState(null);
   const navigate = useNavigate();
   const webApp = useMaxBridge();
 
   useEffect(() => {
     if (!isScanning) return;
 
-    const codeReader = new BrowserMultiFormatReader(
-      (timeBetweenScansMillis = 20)
-    );
+    const codeReader = new BrowserMultiFormatReader(null, 20);
 
     const startScanning = async () => {
       try {
